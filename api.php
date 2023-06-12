@@ -7,6 +7,9 @@ $array = [
     "messaggio-5",
     "messaggio-6",
 ];
+
+
+
 $arrayToJson = json_encode($array);
 header('Content-Type: application/json');
 echo $arrayToJson;

@@ -12,22 +12,28 @@
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
-<body>
+<body class="bg-light">
 
     <div id="app">
         <div class="container-fluid">
             <div class="container">
-                <div class="row py-5">
-                    <div class="col-5">
-                        <h2>{{ message }}</h2>
-                        <ul>
-                             <li v-for="(item, index) in apiResponse" :key="index">
-                                {{ item }}
-                            </li>
-                        </ul>
-                        <button
-                        class="btn btn-primary"
-                         @click="getDataFromApi(apiURL)">Get Data</button>
+                <div class="row py-5 justify-content-center">
+                    <div class="col-5 card border px-0 rounded-top-3">
+                        <div class="card-header bg-primary rounded-top-3 text-white">
+                            <h4 class="py-2">{{ header }}</h4>
+                        </div>
+                        <div class="container px-0 py-5  pb-5">
+                            <ul class="list-group">
+                                 <li class="list-group-item list-group-item-action" v-for="(item, index) in apiResponse" :key="index">
+                                    {{ item }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="container pb-5">
+                            <button
+                            class="btn btn-primary"
+                             @click="getDataFromApi(apiURL)">Get Data</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,13 +49,13 @@
       data() {
         return {
           apiURL: 'api.php',
-          message: 'Hello Vue',
+          header: 'List from API',
           apiResponse: [],
         };
       },
       methods: {
-        getDataFromApi(apiURL) {
-          axios.get(apiURL)
+        getDataFromApi() {
+          axios.get(this.apiURL)
             .then(response => {
               this.apiResponse = response.data;
             })
@@ -58,9 +64,7 @@
             });
         },
       },
-      mounted() {
-        this.getDataFromApi(this.apiURL);
-      },
+      
     }).mount('#app');
   </script>
 </body>
