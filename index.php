@@ -20,7 +20,11 @@
                 <div class="row py-5">
                     <div class="col-5">
                         <h2>{{ message }}</h2>
-                            <p>{{apiResponse}}</p>
+                        <ul>
+                             <li v-for="(item, index) in apiResponse" :key="index">
+                                {{ item }}
+                            </li>
+                        </ul>
                         <button
                         class="btn btn-primary"
                          @click="getDataFromApi(apiURL)">Get Data</button>
@@ -40,7 +44,7 @@
         return {
           apiURL: 'api.php',
           message: 'Hello Vue',
-          apiResponse: '',
+          apiResponse: [],
         };
       },
       methods: {
@@ -55,7 +59,6 @@
         },
       },
       mounted() {
-        // Perform actions after the component is mounted
         this.getDataFromApi(this.apiURL);
       },
     }).mount('#app');
