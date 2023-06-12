@@ -13,20 +13,52 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-     <!-- vueJs-3 -->
+
+    <div id="app">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row py-5">
+                    <div class="col-5">
+                        <h2>{{ message }}</h2>
+                            <p>{{apiResponse}}</p>
+                        <button
+                        class="btn btn-primary"
+                         @click="getDataFromApi(apiURL)">Get Data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- vueJs-3 -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <div id="app">{{ message }}</div>
+    <script>
+    const { createApp } = Vue;
 
-<script>
-  const { createApp } = Vue
-
-  createApp({
-    data() {
-      return {
-        message: 'Hello Vue!'
-      }
-    }
-  }).mount('#app')
-</script>
+    createApp({
+      data() {
+        return {
+          apiURL: 'api.php',
+          message: 'Hello Vue',
+          apiResponse: '',
+        };
+      },
+      methods: {
+        getDataFromApi(apiURL) {
+          axios.get(apiURL)
+            .then(response => {
+              this.apiResponse = response.data;
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        },
+      },
+      mounted() {
+        // Perform actions after the component is mounted
+        this.getDataFromApi(this.apiURL);
+      },
+    }).mount('#app');
+  </script>
 </body>
 </html>
