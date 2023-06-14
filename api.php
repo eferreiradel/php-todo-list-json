@@ -1,16 +1,14 @@
 <?php
-$array = [
-    "messaggio-1",
-    "messaggio-2",
-    "messaggio-3",
-    "messaggio-4",
-    "messaggio-5",
-    "messaggio-6",
-];
-
-
-
-$arrayToJson = json_encode($array);
 header('Content-Type: application/json');
-echo $arrayToJson;
 
+$response = [];
+
+if (isset($_POST['note'])) {
+    $noteValue = $_POST['note'];
+    
+    array_push($response, $noteValue);
+}
+
+$jsonData = json_encode($response);
+echo $jsonData;
+?>

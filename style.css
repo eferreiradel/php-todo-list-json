@@ -1,0 +1,7 @@
+.form-control::placeholder {
+  color: lightgray;
+}
+
+.color--primary {
+  color: red;
+}
